@@ -1,10 +1,10 @@
 const express = require('express');
-import cors from 'cors';
-import morgan from 'morgan';
+const cors = require('cors');
+const morgan = require('morgan');
 const app = express();
 const path = require("path");
 
-const templatePath = path.join(__dirname, '../tempelates')
+//const templatePath = path.join(__dirname, '../tempelates')
 
 
 /**middlewares */
@@ -17,7 +17,7 @@ const port = 8000;
 
 /**HTTP GET Request */
 app.get('/', (req, res) => {
-    res.status(201).json("Home GET Request");
+    res.status(201).json("Home GET ");
 
 })
 
