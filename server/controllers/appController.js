@@ -54,7 +54,7 @@ export async function register(req,res){
                             // return save result as a response
                             user.save()
                                 .then(result => res.status(201).send({ msg: "User Register Successfully"}))
-                                .catch(error => res.status(500).send({error}))
+                                .catch(error => res.status(500).send({error1}))
 
                         }).catch(error => {
                             return res.status(500).send({
@@ -63,12 +63,12 @@ export async function register(req,res){
                         })
                 }
             }).catch(error => {
-                return res.status(500).send({ error })
+                return res.status(500).send({ error2})
             })
 
 
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(500).send(error3);
     }
 
 }
