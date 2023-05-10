@@ -3,6 +3,22 @@ import bcrypt from 'bcrypt';
 import jwt  from 'jsonwebtoken';
 import ENV from '../config.js';
 
+/** middleware for verfiy user */
+export async function verifyUser(req, res, next){
+    try {
+        
+        const { username } = req.method == "GET" ? req.query: req.body;
+
+        // check the user existance
+        let exist = await UserModel.findOne({ username }); 
+        if(!exist) return res.status(404).send({ error: "Cant find User!"});
+        next();
+
+    } catch (error) {
+        return res.status(404).send({ error: "Authentication Error"});
+    }
+}
+
 /** POST: http://localhost:4001/api/register 
  * @param : {
   "username" : "example123",
@@ -126,9 +142,28 @@ export async function login(req,res){
     }
 }
 
-
+/** GET: http://localhost:8080/api/user/example123 */
 export async function getUser(req,res){
-    res.json('getUser route');
+    const { username } = req.params;
+
+    try {
+        
+        if(!username) return res.status(501).send({ error: "Invalid Username"});
+
+        UserModel.findOne({ username }, function(err, user){
+            if(err) return res.status(500).send({ err });
+            if(!user) return res.status(501).send({ error : "Couldn't Find the User"});
+
+            /** remove password from user */
+            // mongoose return unnecessary data with object so convert it into json
+            const { password, ...rest } = Object.assign({}, user.toJSON());
+
+            return res.status(201).send(rest);
+        })
+
+    } catch (error) {
+        return res.status(404).send({ error : "Cannot Find User Data"});
+    }
 }
 
 export async function updateUser(req,res){
