@@ -142,7 +142,7 @@ export async function login(req,res){
     }
 }
 
-/** GET: http://localhost:8080/api/user/example123 */
+/** GET: http://localhost:4001/api/user/example123 */
 export async function getUser(req,res){
     const { username } = req.params;
 
@@ -166,8 +166,42 @@ export async function getUser(req,res){
     }
 }
 
+/** PUT: http://localhost:4001/api/updateuser 
+ * @param: {
+  "header" : "<token>"
+}
+body: {
+    firstName: '',
+    address : '',
+    profile : ''
+}
+*/
 export async function updateUser(req,res){
-    res.json('updateUser route');
+    
+    try {
+        
+     //const id = req.query.id;
+    const { userId } = req.user;
+
+    if(userId){
+        const body = req.body;
+
+        // update the data
+        UserModel.updateOne({ _id : userId }, body, function(err, data){
+            if(err) throw err;
+
+            return res.status(201).send({ msg : "Record Updated...!"});
+        })
+
+    }else{
+        return res.status(401).send({ error1 : "User Not Found...!"});
+    }
+
+} catch (error2) {
+    console.log('error2' , error2)
+    return res.status(401).send({ error2 });
+    
+}
 }
 
 export async function generateOTP(req,res){
