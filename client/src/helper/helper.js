@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+axios.defaults.baseURL = 'http://localhost:4001'//process.env.REACT_APP_SERVER_DOMAIN;
 
 /** Make API Requests */
 
@@ -8,7 +8,8 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 /** authentication function */
 export async function authenticate(username){
     try {
-        return await axios.post('/api/authenticate' , { username })
+        console.log(axios.defaults.baseURL)
+        return await axios.post( '/api/authenticate' , { username })
     } catch (error){
         return { error : "Username doesnt exist...!"}
     }
