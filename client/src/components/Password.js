@@ -7,6 +7,7 @@ import { passwordValidate } from '../helper/validate'
 import useFetch from '../hooks/fetch.hook';
 import { useAuthStore } from '../store/store'
 import { verifyPassword } from '../helper/helper'
+
 import styles from '../styles/Username.module.css';
 
 export default function Password() {
@@ -23,7 +24,7 @@ export default function Password() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
-      
+    
       let loginPromise = verifyPassword({ username, password : values.password })
       toast.promise(loginPromise, {
         loading: 'Checking...',

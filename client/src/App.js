@@ -12,6 +12,10 @@ import Reset from './components/Reset';
 import PageNotFound from './components/PageNotFound';
 
 
+/** auth middleware */
+import { AuthorizeUser} from './middleware/auth'
+
+
 /** root routes */
 const router = createBrowserRouter([
     {
@@ -28,7 +32,7 @@ const router = createBrowserRouter([
     },
     {
         path : '/profile',
-        element : <Profile></Profile>
+        element : <AuthorizeUser><profile /></AuthorizeUser>
     },
     {
         path : '/recovery',
