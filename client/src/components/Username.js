@@ -13,8 +13,8 @@ export default function Username() {
   const navigate = useNavigate();
 
   const setUsername = useAuthStore(state => state.setUsername);
- 
-  
+  //const username = useAuthStore(state => state.auth.username)
+
 
   const formik = useFormik({
     initialValues : {
@@ -24,9 +24,9 @@ export default function Username() {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit : async values => {
-     //console.log(values)
      setUsername(values.username);
-     console.log(values)
+     navigate('/password')
+     
     }
   })
 
