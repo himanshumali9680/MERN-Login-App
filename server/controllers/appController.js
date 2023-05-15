@@ -226,8 +226,7 @@ export async function verifyOTP(req,res){
 /** GET: http://localhost:4001/api/createResetSession */
 export async function createResetSession(req,res){
     if(req.app.locals.resetSession){
-       req.app.locals.resetSession = false;
-       return res.status(201).send({ msg: "access granted!" })
+       return res.status(201).send({ flag : req.app.locals.resetSession })
    }
    return res.status(440).send({error : "Session expired!"})
 }
