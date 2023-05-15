@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import avatar from '../assets/profile.png';
 import { toast, Toaster } from 'react-hot-toast';
-
 import { useFormik } from 'formik';
 import { profileValidation } from '../helper/validate';
 import useFetch from '../hooks/fetch.hook';
 import convertToBase64 from '../helper/convert';
 import { updateUser } from '../helper/helper';
+//import { useAuthStore } from '../store/store'
+import { useNavigate } from 'react-router-dom';
 
 import styles from '../styles/Username.module.css';
 import extend from '../styles/Profile.module.css'
@@ -15,6 +15,8 @@ import extend from '../styles/Profile.module.css'
 export default function Profile() {
 
   const [file, setFile] = useState()
+  //const { username } = useAuthStore(state => state.auth)
+
   const [{ isLoading, apiData, serverError }] = useFetch();
   const navigate = useNavigate()
 
@@ -39,7 +41,7 @@ export default function Profile() {
         loading: 'Updating...',
         success: <b>Update Successfully...!</b>,
         error: <b>Could not Update!</b>
-      })
+      });
     }
   })
 
@@ -48,6 +50,8 @@ export default function Profile() {
     const base64 = await convertToBase64(e.target.files[0]);
     setFile(base64);
   }
+
+
   // logout handler function 
   function userLogout(){
     localStorage.removeItem('token');

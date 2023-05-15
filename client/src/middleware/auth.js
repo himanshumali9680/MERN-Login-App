@@ -10,3 +10,4 @@ export const AuthorizeUser = ({ children }) => {
 
      return children;
 }
+

@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     },
     {
         path : '/profile',
-        element : <AuthorizeUser><profile /></AuthorizeUser>
+        element : <AuthorizeUser><Profile /></AuthorizeUser>
     },
     {
         path : '/recovery',

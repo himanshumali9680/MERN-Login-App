@@ -13,7 +13,7 @@ export async function getUsername(){
     let decode = jwt_decode(token)
     return decode;
 }
-
+ 
 /** authentication function */
 export async function authenticate(username){
     try {
